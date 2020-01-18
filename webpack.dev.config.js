@@ -1,17 +1,27 @@
 const path = require("path");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
-  entry: "./src/index.js",
+  entry: "./src/jq.js",
   output: {
     path: __dirname,
-    filename: "dist/bundle.js"
+    filename: "./dist/bundle.js"
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js?$/,
+        exclude: /(node_modules)/,
+        loader: 'babel-loader'
+      }
+    ]
   },
   plugins: [
       new HtmlWebpackPlugin({
-      template: 'index.html'
+      template: './index.html'
   })
 ],
 devServer: {
+    contentBase: path.join(__dirname,'./dist'),
     port: 8888,
     open: true
 }
